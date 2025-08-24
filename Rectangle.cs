@@ -6,7 +6,9 @@ class Rectangle {
     Console.Write("Nhap chieu rong cua hinh chu nhat : ");
     double w = Convert.ToDouble(Console.ReadLine());
     double chuvi = 2*(l+w);
-    Console.Write("Chu vi cua hinh chu nhat la : " + chuvi);
+    double dientich = l*w;
+    Console.WriteLine("Chu vi cua hinh chu nhat la : " + chuvi);
+    Console.Write("Dien tich cua hinh chu nhat la : " + dientich);
     Console.ReadLine();
   }
 }
