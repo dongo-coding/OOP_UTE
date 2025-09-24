@@ -1,0 +1,123 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace Chapter_5___Operator_overloading
+{
+ public class PhanSo
+ {
+ public int iTuSo { get; set; }// numerator
+ public int iMauSo { get; set; }// denominator
+ public PhanSo()
+ {
+ }
+ public PhanSo(int tuso, int mauso)
+ {
+ this.iTuSo = tuso;
+ this.iMauSo = mauso;
+ }
+ //Add two fractions
+ public static PhanSo operator +(PhanSo a, PhanSo b)
+ {
+ if (a.iMauSo == b.iMauSo)
+ {
+ return new PhanSo(a.iTuSo + b.iTuSo, a.iMauSo);
+ }
+ int tu1 = a.iTuSo * b.iMauSo;
+ int tu2 = b.iTuSo * a.iMauSo;
+ return new PhanSo(tu1 + tu2, a.iMauSo * b.iMauSo);
+ }
+ //Add a fraction and an integer number
+ public static PhanSo operator +(PhanSo a, int num)
+ {
+ return new PhanSo(a.iTuSo + a.iTuSo*num, a.iMauSo);
+ }
+ //Increase a fraction by 1
+ public static PhanSo operator ++(PhanSo a)
+ {
+ a = a + 1;
+ return a;
+ }
+ //Compare two fractions (greater)
+ public static bool operator >(PhanSo a, PhanSo b)
+ {
+ double value1 = (double)a.iTuSo / a.iMauSo;
+ double value2 = (double)b.iTuSo / b.iMauSo;
+ return value1 > value2;
+ }
+ // Compare two fractions (smaller)
+ public static bool operator <(PhanSo a, PhanSo b)
+ {
+ double value1 = (double)a.iTuSo / a.iMauSo;
+ double value2 = (double)b.iTuSo / b.iMauSo;
+ return value1 < value2;
+ }
+ // Compare two fractions (equal)
+ public static bool operator ==(PhanSo a, PhanSo b)
+ {
+ double value1 = (double)a.iTuSo / a.iMauSo;
+ double value2 = (double)b.iTuSo / b.iMauSo;
+ return value1 == value2;
+ }
+ //Compare two fractions (vary)
+ public static bool operator !=(PhanSo a, PhanSo b)
+ {
+ double value1 = (double)a.iTuSo / a.iMauSo;
+ double value2 = (double)b.iTuSo / b.iMauSo;
+ return value1 != value2;
+ }
+ //Type-casting an integer number to a fraction
+ public static implicit operator PhanSo(int num)
+ {
+ PhanSo kq = new PhanSo(num, 1);
+ return kq;
+ }
+ //Type-casting a fraction to a floating-point number
+ public static explicit operator double(PhanSo ps)
+ {
+ double kq = (double)ps.iTuSo / ps.iMauSo;
+ return kq;
+ }
+ public void Xuat()
+ {
+ Console.WriteLine(this.iTuSo + "/" + this.iMauSo);
+ }
+ }
+ class Program
+ {
+ static void Main(string[] args)
+ {
+ PhanSo a = new PhanSo(2, 5);
+ PhanSo b = new PhanSo(4, 5);
+ PhanSo c = a + b;
+ c.Xuat();
+ c++;
+ c.Xuat();
+ if (a>b)
+ {
+ Console.WriteLine("a lon hon b");
+ }
+ else
+ {
+ Console.WriteLine("a nho hon hoac bang b");
+ }
+ if (a == b)
+ {
+ Console.WriteLine("a bang b");
+ }
+ else
+ {
+ Console.WriteLine("a khong bang b");
+ }
+ Console.WriteLine("Nhap vao mot so nguyen: ");
+ int num = Convert.ToInt32(Console.ReadLine());
+ Console.WriteLine("Kieu phan so la: ");
+ PhanSo d = num;//Implicit casting
+ d.Xuat();
+
+ double kq = (double)a;//Explicit casting
+ Console.WriteLine("Gia tri cua phan so la: " + kq);
+ }
+ }
+}
