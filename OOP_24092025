@@ -31,7 +31,7 @@ namespace Chapter_5___Operator_overloading
  //Add a fraction and an integer number
  public static PhanSo operator +(PhanSo a, int num)
  {
- return new PhanSo(a.iTuSo + a.iTuSo*num, a.iMauSo);
+ return new PhanSo(a.iTuSo + a.iMauSo*num, a.iMauSo);
  }
  //Increase a fraction by 1
  public static PhanSo operator ++(PhanSo a)
